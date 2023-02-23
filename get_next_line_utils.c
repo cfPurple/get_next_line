@@ -12,78 +12,82 @@
 
 #include "get_next_line.h"
 
-int found_new_line(t_list *stash)
+void ft_strlcpy(char **dst, char *src)
+{
+    int i;
+
+    i = 0;
+        while (src[i])
+        {
+            (*dst)[i] = src[i];
+            i++;
+        }
+        (*dst)[i] = '\0';
+}
+int found_new_line(char *str)
 {
 	int i;
-	t_list *current;
 
-	if (stash == NULL)
-		return (0);
-	current = ft_lst_get_last(stash);
 	i = 0;
-	while (current->content[i])
-	{
-		if (current->content[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
+    if (str == NULL)
+        return (0);
+    while (str[i])
+    {
+        if (str[i] == '\n')
+            return (1);
+        i++;
+    }
+    return (0);
 }
-
-t_list *ft_lst_get_last(t_list *stash)
-{
-	t_list *current;
-
-	current = stash;
-	while (current && current->next)
-		current = current ->next;
-	return (current);
-}
-
-void generate_line(char **line, t_list *stash)
+int char_until_end(char *str)
 {
 	int i;
-	int len;
 
-	len = 0;
-	while (stash)
-	{
-		i = 0;
-		while (stash->content[i])
-			{
-				if (stash->content[i] == '\n')
-				{
-					len++;
-					break;
-				}
-				len++;
-				i++;
-			}
-			stash = stash->next;
-	}
-	*line = malloc(sizeof(char) * (len + 1));
-}
-void free_stash(t_list *stash)
-{
-	t_list *current;
-	t_list *next;
-
-	current = stash;
-	while (current)
-	{
-		free(current->content);
-		next = current->next;
-		free(current);
-		current = next;
-	}
+	i = 0;
+    while (str[i])
+    {
+        if (str[i] == '\n')
+        {
+            i++;
+            break;
+        }
+        i++;
+    }
+    return (i);
 }
 
-int ft_strlen(const char *str)
+int ft_strlen(char *str)
 {
-	int len;
+    int len;
 
-	len = 0;
-	while (*(str++))
-		len++;
-	return (len);
+    len = 0;
+    while (str[len])
+        len++;
+    return (len);
+}
+
+void clean_stash(char **stash)
+{
+    int i;
+    int j;
+    char *temp;
+
+    i = 0;
+    j = 0;
+    while((*stash)[i] && (*stash)[i] != '\n')
+        i++;
+    if ((*stash)[i] == '\n')
+        i++;
+    temp = malloc(sizeof(char) * (ft_strlen(*stash) - i ) + 1);
+    if (temp == NULL)
+        return;
+    while((*stash)[i])
+        temp[j++] = (*stash)[i++];
+    temp[j] = '\0';
+    free(*stash);
+    *stash = malloc(sizeof(char) * (ft_strlen(temp)+ 1));
+    if (*stash == NULL)
+        return;
+    ft_strlcpy(stash,temp);
+    free(temp);
 }

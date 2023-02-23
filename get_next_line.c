@@ -1,5 +1,4 @@
 #include "get_next_line.h"
-#include <unistd.h>
 
 int extend_stash(char **stash, char *buf)
 {

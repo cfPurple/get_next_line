@@ -6,11 +6,11 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10000000
+#  define BUFFER_SIZE 10
 # endif 
 
 int extend_stach(char **stash, char *buf);
-void stoch(char **stash, char *buf, int red);
+void stock(char **stash, char *buf, int red);
 void read_n_stock(int fd, char **stash);
 char *get_next_line(int fd);
 int found_new_line(char *str);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	extend_stash(char **stash, char *buf)
 {
@@ -107,22 +107,22 @@ void	extract_line(char **stash, char **line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash = NULL;
+	static char	*stash[FD_SIZE];
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (stash != NULL)
-		clean_stash(&stash);
-	if (!found_new_line(stash))
-		read_n_stock(fd, &stash);
-	if (stash == NULL)
+	if (stash[fd] != NULL)
+		clean_stash(&stash[fd]);
+	if (!found_new_line(stash[fd]))
+		read_n_stock(fd, &stash[fd]);
+	if (stash[fd] == NULL)
 		return (NULL);
-	if (stash[0] != '\0')
-		extract_line(&stash, &line);
-	if (stash[0] == '\0')
+	if (stash[fd][0] != '\0')
+		extract_line(&stash[fd], &line);
+	if (stash[fd][0] == '\0')
 	{
-		free(stash);
+		free(stash[fd]);
 		return (NULL);
 	}
 	return (line);

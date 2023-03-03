@@ -16,12 +16,15 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
-# endif 
+# endif
+
+# define OPEN_MAX FOPEN_MAX
 
 int		extend_stash(char **stash, char *buf);
 void	stock(char **stash, char *buf, int red);

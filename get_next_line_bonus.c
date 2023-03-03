@@ -107,10 +107,10 @@ void	extract_line(char **stash, char **line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*stash[FD_SIZE];
+	static char	*stash[OPEN_MAX];
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (stash[fd] != NULL)
 		clean_stash(&stash[fd]);

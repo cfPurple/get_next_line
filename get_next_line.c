@@ -127,3 +127,21 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	if (argc <= 1)
+// 		return (EXIT_FAILURE);
+// 	fd = open(argv[1], O_RDONLY);
+// 	line = get_next_line(fd);
+// 	while (line != NULL)
+// 	{
+// 		printf("[%s]", line);
+// 		free(line);
+// 		line = get_next_line(fd);
+// 	}
+// 	close(fd);
+// 	return (EXIT_SUCCESS);
+// }

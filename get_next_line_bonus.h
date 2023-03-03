@@ -13,18 +13,19 @@
 #ifndef GET_NEXT_LINE_BONUS_H
 
 # define GET_NEXT_LINE_BONUS_H
+
 # include <unistd.h>
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
 # ifndef FD_SIZE
 #  define FD_SIZE 65535
 # endif 
 
-int		extend_stach(char **stash, char *buf);
+int		extend_stash(char **stash, char *buf);
 void	stock(char **stash, char *buf, int red);
 void	read_n_stock(int fd, char **stash);
 char	*get_next_line(int fd);
